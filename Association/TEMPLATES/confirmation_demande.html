@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">🔒 Confirmation de la Demande</h4>
+    </div>
+    <div class="card-body">
+      <p><strong>📄 Type de demande :</strong> {{ demande_type }}</p>
+
+      <h5 class="mt-4">📝 Détails de la modification :</h5>
+      <table class="table table-bordered table-striped mt-3">
+        <tbody>
+          {% for key, value in demande_data.items %}
+          <tr>
+            <th class="bg-light" style="width: 30%;">{{ key|capfirst }}</th>
+            <td>{{ value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <form method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="d-flex justify-content-between">
+          <button type="submit" name="annuler" class="btn btn-outline-secondary">
+            ❌ Annuler
+          </button>
+          <button type="submit" name="confirmer" class="btn btn-success">
+            ✅ Confirmer la demande
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

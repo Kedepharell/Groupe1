@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Succès{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Opération Réussie</h1>
+    <p>Votre action a été effectuée avec succès.</p>
+    <a href="{% url 'home' %}">Retour à l'accueil</a>  <!-- Mettez à jour le nom de la page d'accueil si nécessaire -->
+</div>
+{% endblock %}

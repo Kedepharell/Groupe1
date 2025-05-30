@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Valider la demande #{{ notification.id }}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        background-color: #f9f9f9;
+      }
+      h1 {
+        color: #333;
+      }
+      pre {
+        background-color: #eee;
+        padding: 1rem;
+        border-radius: 5px;
+        max-height: 300px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      a {
+        display: inline-block;
+        margin-top: 1rem;
+        text-decoration: none;
+        color: #555;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+</head>
+<body>
+    <h1>Valider la demande #{{ notification.id }}</h1>
+    <p><strong>Type :</strong> {{ notification.type_modification }}</p>
+
+    <h3>Détails :</h3>
+    <pre>{{ notification.details|safe }}</pre>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Valider la demande</button>
+    </form>
+
+    <a href="{% url 'tableau_de_bord_global' %}">Retour au tableau de bord global</a>
+</body>
+</html>

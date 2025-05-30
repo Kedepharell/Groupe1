@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Traiter Notification</title>
+</head>
+<body>
+    <h1>Traiter la Notification</h1>
+
+    <p>Type de modification : {{ notification.type_modification }}</p>
+    <p>Détails : {{ notification.details }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="action" value="valider">Valider</button>
+        <button type="submit" name="action" value="refuser">Refuser</button>
+    </form>
+</body>
+</html>

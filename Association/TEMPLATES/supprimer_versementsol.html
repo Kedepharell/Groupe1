@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Confirmer la suppression d'un versement de solde</h3>
+            <p>Êtes-vous sûr de vouloir supprimer ce versement de solde?</p>
+            <table class="table table-striped">
+                <tr>
+                    <th>Montant</th>
+                    <th>Date</th>
+                   
+                </tr>
+                <tr>
+                    <td>{{ versementsol.montant }}</td>
+                    <td>{{ versementsol.date }}</td>
+                    
+                </tr>
+            </table>
+            <form action="{% url 'supprimer_versementsol' versementsol.idVersSol %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+                <a href="{% url 'versementsols' %}" class="btn btn-secondary">Annuler</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

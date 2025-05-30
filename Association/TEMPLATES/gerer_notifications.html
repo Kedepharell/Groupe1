@@ -1,0 +1,31 @@
+<table>
+    <thead>
+        <tr>
+            <th>Utilisateur</th>
+            <th>Type de Modification</th>
+            <th>Détails</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for notification in notifications %}
+        <tr>
+            <td>{{ notification.utilisateur.username }}</td>
+            <td>{{ notification.type_modification }}</td>
+            <td>{{ notification.details }}</td>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="notification_id" value="{{ notification.id }}">
+                    <button type="submit" name="action" value="valider" class="btn btn-success">Valider</button>
+                    <button type="submit" name="action" value="refuser" class="btn btn-danger">Refuser</button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Aucune notification en attente.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

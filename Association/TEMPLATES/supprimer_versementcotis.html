@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Confirmer la suppression d'un versement de cotisation</h3>
+            <p>Êtes-vous sûr de vouloir supprimer ce versement de cotisation ?</p>
+            <table class="table table-striped">
+                <tr>
+                    <th>Montant</th>
+                    <th>Mode de Versement</th>
+                    
+                </tr>
+                <tr>
+                    <td>{{ versementcotis.montant }}</td>
+                    <td>{{versementcotis.modeVersement }}</td>
+                    
+                </tr>
+            </table>
+            <form action="{% url 'supprimer_versementcotis' versementcotis.idVersCotis %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+                <a href="{% url 'versementcotisa' %}" class="btn btn-secondary">Annuler</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

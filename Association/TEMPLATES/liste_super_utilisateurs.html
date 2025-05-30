@@ -1,0 +1,21 @@
+<h2>Liste des Super Utilisateurs</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for super_utilisateur in super_utilisateurs %}
+        <tr>
+            <td>{{ super_utilisateur.username }}</td>
+            <td>{{ super_utilisateur.email }}</td>
+            <td>
+                <a href="{% url 'notification_super_utilisateur' super_utilisateur.id %}">Notifier</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

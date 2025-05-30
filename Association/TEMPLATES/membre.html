@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Liste des Membres de l'Association</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Année d'Entrée</th>
+                        <th>Tontine</th>
+                        <th>Actions</th>  <!-- Nouvelle colonne pour les actions -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for membre in membres %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ membre.nom }}</td>
+                        <td>{{ membre.prenom }}</td>
+                        <td>{{ membre.email }}</td>
+                        <td>{{ membre.anneeEntree }}</td>
+                        <td>{{ membre.tontines.first.nomTontines }}</td>  <!-- Afficher le nom de la tontine -->
+                        <td>
+                            {% if  user.is_superuser %}
+                                <a href="{% url 'modifier_membre' membre.idMembre %}" class="btn btn-warning btn-sm">Modifier</a>
+                                <a href="{% url 'supprimer_membre' membre.idMembre %}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce membre ?');">Supprimer</a>
+                            {% endif  %}
+                        </td>
+                    
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center">Aucun membre trouvé.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+        </div>
+    </div>
+</div>
+{% endblock %}

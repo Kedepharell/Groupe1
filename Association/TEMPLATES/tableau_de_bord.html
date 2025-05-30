@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row shadow-lg p-4 rounded">
+        <div class="col-lg-12">
+            <h1 class="text-center text-primary mb-4">Tableau de Bord - {{ user.username }}</h1>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Tontines</h3>
+                    <ul class="list-group">
+                        {% for tontines in tontine %}
+                            <li class="list-group-item">{{ tontines.get_type_tontine_display }}</li>
+                        {% empty %}
+                            <li class="list-group-item">Aucune tontine trouvée.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Épargnes</h3>
+                    <ul class="list-group">
+                        {% for epargne in epargnes %}
+                            <li class="list-group-item">{{ epargne.montant }} - {{ epargne.modeVersement }}</li>
+                        {% empty %}
+                            <li class="list-group-item">Aucune épargne trouvée.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Cotisations</h3>
+                    <ul class="list-group">
+                        {% for cotisation in cotisations %}
+                            <li class="list-group-item">{{ cotisation.libelle }} - {{ cotisation.nbPartMax }}</li>
+                        {% empty %}
+                            <li class="list-group-item">Aucune cotisation trouvée.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Remboursements</h3>
+                    <ul class="list-group">
+                        {% for remboursement in remboursements %}
+                            <li class="list-group-item">{{ remboursement.montant_rembourse }}</li>
+                        {% empty %}
+                            <li class="list-group-item">Aucun remboursement trouvé.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

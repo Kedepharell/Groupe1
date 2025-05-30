@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une Sanction</title>
+</head>
+<body>
+    <h1>Ajouter une Sanction</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Ajouter</button>
+    </form>
+    <a href="{% url 'sanctions' %}">Retour à la liste des sanctions</a>
+</body>
+</html>

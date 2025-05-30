@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Liste des Versements en Solde</h3>
+            <a href="{% url 'ajouter_versementsol' %}" class="btn btn-primary mb-3">Ajouter une versement de solde</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Montant</th>
+                        <th>Mode de Versement</th>
+                        <th>coupon de versement</th>
+                        <th>idMembre</th>
+                        <th>idSeance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for versementsol in versementsols %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ versementsol.montant }}</td>
+                            <td>{{ versementsol.modeversement }}</td>
+                            <td>{{ versementsol.couponVersement}}</td>
+                            <td>{{ versementsol.idMembre}}</td>
+                            <td>{{ versementsol.idSeance}}</td>
+                        </tr>
+                        <td>
+                            <a href="{% url 'modifier_versementsol' versementsol.idVersSol %}" class="btn btn-warning btn-sm">Modifier</a>
+                            <a href="{% url 'supprimer_versementsol' versementsol.idVersSol %}" class="btn btn-danger btn-sm">Supprimer</a>
+                        </td>  <!-- Actions pour modifier et supprimer -->
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Aucun versement trouvé.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Détails du Versement en Solde</h3>
+            <p><strong>Montant :</strong> {{ versement.montant }}</p>
+            <p><strong>Mode de Versement :</strong> {{ versement.modeversement }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+<h1>Prêts pour {{ membre.nom }}</h1>
+
+<h2>Prêts en tant qu'Avaliste</h2>
+<ul>
+    {% for pret in prets_avaliste %}
+        <li>Montant : {{ pret.montant }} - Observations : {{ pret.observations }} - Pourcentage : {{ pret.pourcentage }}</li>
+    {% empty %}
+        <li>Aucun prêt en tant qu'avaliste.</li>
+    {% endfor %}
+</ul>
+
+<h2>Prêts en tant que Prêteur</h2>
+<ul>
+    {% for pret in prets_preteur %}
+        <li>Montant : {{ pret.montant }} - Observations : {{ pret.observations }} - Pourcentage : {{ pret.pourcentage }}</li>
+    {% empty %}
+        <li>Aucun prêt en tant que prêteur.</li>
+    {% endfor %}
+</ul>

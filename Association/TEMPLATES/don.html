@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Liste des Dons</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Montant</th>
+                        <th>Nature</th>
+                        <th>Description du don</th>
+                        <th>Date de Don</th>
+                        <th>Statut</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    {% for don in dons %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ don.montant_don}}</td>
+                            <td>{{ don.nature_don }}</td>
+                            <td>{{ don.description_don }}</td>
+
+                            <td>{{ don.date_don|date:"d/m/Y" }}</td>
+
+                            <td>
+                                {% if user.is_superuser %}
+                                    <a href="{% url 'modifier_don' don.iddon%}" class="btn btn-primary">Modififier un Don</a>
+                                    <a href="{% url 'supprimer_don' don.iddon%}" class="btn btn-primary">Supprimer un Don</a>
+                                {% endif  %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6">Aucun don trouvé.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+           
+            
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

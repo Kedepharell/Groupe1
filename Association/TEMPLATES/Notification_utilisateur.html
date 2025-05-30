@@ -1,0 +1,6 @@
+<h2>Notifier {{ utilisateur.username }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <textarea name="message" required></textarea>
+    <button type="submit">Envoyer Notification</button>
+</form>

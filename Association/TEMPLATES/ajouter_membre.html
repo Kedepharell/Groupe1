@@ -1,0 +1,23 @@
+<!-- membre.html -->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un Membre</title>
+</head>
+<body>
+    <h1>Ajouter un Membre</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Affiche le formulaire -->
+        <button type="submit">Ajouter</button>
+    </form>
+    <a href="{% url 'membres' %}">Retour à la liste des membres</a>
+    <h2>Liste des Membres</h2>
+<ul>
+    {% for membre in membres %}
+        <li>{{ membre.nom }} {{ membre.prenom }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
+

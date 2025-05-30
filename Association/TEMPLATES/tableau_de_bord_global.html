@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tableau de Bord Global</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        table {
+            width: 100%; /* Agrandir le tableau pour qu'il prenne toute la largeur */
+            border-collapse: collapse; /* Pour supprimer les espaces entre les bordures */
+        }
+        th, td {
+            padding: 10px; /* Ajout de padding pour un meilleur espacement */
+            text-align: left;
+            border: 1px solid black; /* Bordure pour les cellules */
+        }
+        footer {
+            margin-top: auto; /* Pour pousser le footer en bas de la page */
+            text-align: center; /* Centrer le texte */
+            padding: 20px; /* Padding pour le footer */
+        }
+    </style>
+</head>
+<body>
+    <h1>Tableau de Bord Global</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Tontines</th>
+                <th>Total Épargnes</th>
+                <th>Total Prêts</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for membre in membres %}
+            <tr>
+                <td>{{ membre.nom }} {{ membre.prenom }}</td>
+                <td>
+                    {% for tontine in membre.tontines.all %}
+                        {{ tontine.nomTontines }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        Aucune
+                    {% endfor %}
+                </td>
+                <td>{{ membre.total_epargnes }}</td>
+                <td>{{ membre.total_prets }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    
+</body>
+</html>
+{% endblock %}

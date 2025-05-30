@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un Versement Solidaire</title>
+</head>
+<body>
+    <h1>Ajouter un Versement Solidaire</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Ajouter</button>
+    </form>
+    <a href="{% url 'versementsols' %}">Retour à la liste des versements solidaires</a>
+</body>
+</html>

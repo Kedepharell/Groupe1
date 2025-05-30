@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un Remboursement</title>
+</head>
+<body>
+    <h1>Ajouter un Remboursement</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <label for="pret">Sélectionnez un Prêt :</label>
+        <select name="pret" required>
+            {% for pret in prets %}
+                <option value="{{ pret.idpret }}">{{ pret.idpret }} - {{ pret.montant }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Ajouter Remboursement</button>
+    </form>
+</body>
+</html>

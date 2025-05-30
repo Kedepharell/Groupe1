@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Confirmer la suppression d'une aide</h3>
+            <p>Êtes-vous sûr de vouloir supprimer cet aide ?</p>
+            <table class="table table-striped">
+                <tr>
+                    <th>Montant</th>
+                    <th>description</th>
+                   
+                </tr>
+                <tr>
+                    <td>{{ aide.montant }}</td>
+                    <td>{{ aide.description }}</td>
+                    
+                </tr>
+            </table>
+            <form action="{% url 'supprimer_aide' remboursement.idaide %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+                <a href="{% url 'aides' %}" class="btn btn-secondary">Annuler</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

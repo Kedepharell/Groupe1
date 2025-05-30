@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Informations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #e1bee7);
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+
+        .form-section {
+            display: none;
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        h2 {
+            color: #4a148c;
+            margin-top: 0;
+        }
+
+        button {
+            background-color: #4db6ac;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00897b;
+        }
+
+        form p {
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Modifier vos Informations</h1>
+
+    <div>
+        <label for="modification-select">Choisissez une section à modifier :</label>
+        <select id="modification-select" onchange="showSection(this.value)">
+            <option value="">--Sélectionner--</option>
+            <option value="tontine">Modifier une Tontine</option>
+            <option value="pret">Modifier un Prêt</option>
+            <option value="remboursement">Modifier un Remboursement</option>
+            <option value="epargne">Modifier une Épargne</option>
+            <option value="don">Modifier un Don</option>
+        </select>
+    </div>
+
+    <!-- Formulaire Tontine -->
+    <form method="post" id="tontine" class="form-section">
+        {% csrf_token %}
+        <h2>Choisir une Tontine</h2>
+        {{ forms.tontine_form.as_p }}
+        <button type="submit" name="modifier_tontine">Soumettre Tontine</button>
+    </form>
+
+    <!-- Formulaire Prêt -->
+    <form method="post" id="pret" class="form-section" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Modifier un Prêt</h2>
+        {{ forms.pret_form.as_p }}
+        <button type="submit" name="modifier_pret">Soumettre Prêt</button>
+    </form>
+
+    <!-- Formulaire Remboursement -->
+    <form method="post" id="remboursement" class="form-section">
+        {% csrf_token %}
+        <h2>Remboursement</h2>
+        {{ forms.remboursement_form.as_p }}
+        <button type="submit" name="modifier_remboursement">Soumettre Remboursement</button>
+    </form>
+
+    <!-- Formulaire Épargne -->
+    <form method="post" id="epargne" class="form-section">
+        {% csrf_token %}
+        <h2>Épargne</h2>
+        {{ forms.epargne_form.as_p }}
+        <button type="submit" name="modifier_epargne">Soumettre Épargne</button>
+    </form>
+
+    <!-- Formulaire Don -->
+    <form method="post" id="don" class="form-section">
+        {% csrf_token %}
+        <h2>Don</h2>
+        {{ forms.don_form.as_p }}
+        <button type="submit" name="modifier_don">Soumettre Don</button>
+    </form>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            if (sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) section.classList.add('active');
+            }
+        }
+
+        // Optionnel : Rétablir la dernière section ouverte après validation (si tu ajoutes un mécanisme côté vue/session)
+    </script>
+</body>
+</html>

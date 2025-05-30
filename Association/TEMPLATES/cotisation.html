@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Liste des Cotisations</h3>
+            <a href="{% url 'ajouter_cotisation' %}" class="btn btn-primary mb-3">Ajouter une cotisation</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Libellé</th>
+                        <th>nbPartMax</th>
+                        <th>penaliteDefaillanceBenef</th>
+                        <th>penaliteDefaillanceNonBenef</th>
+                        <th> miseAPrix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cotisation in cotisations %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ cotisation.libelle }}</td>
+                            <td>{{ cotisation.nbPartMax }}</td>
+                            <td>{{ cotisation.penaliteDefaillanceBenef }}</td>
+                            <td>{{ cotisation.penaliteDefaillanceNonBenef}}</td>
+                            <td>{{ cotisation.miseAPrix }}</td>
+                        </tr>
+                        <td>
+                            <a href="{% url 'modifier_cotisation' cotisation.codeCotisation %}" class="btn btn-warning btn-sm">Modifier</a>
+                            <a href="{% url 'supprimer_cotisation' cotisation.codeCotisation %}" class="btn btn-danger btn-sm">Supprimer</a>
+                        </td>  <!-- Actions pour modifier et supprimer -->
+                    {% empty %}
+                        <tr>
+                            <td colspan="8">Aucune cotisation trouvée.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Détails de la Cotisation</h3>
+            <p><strong>Libellé :</strong> {{ cotisation.libelle }}</p>
+            <p><strong>Montant :</strong> {{ cotisation.miseaprix }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

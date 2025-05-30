@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Supprimer un Pret</title>
+</head>
+<body>
+    <h1>Supprimer un Pret</h1>
+    <p>Êtes-vous sûr de vouloir supprimer {{ pret.montant }} ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmer la suppression</button>
+    </form>
+    <a href="{% url 'prets' %}">Annuler</a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications</title>
+</head>
+<body>
+    <h1>Notifications en Attente</h1>
+    <ul>
+        {% for notification in notifications %}
+            <li>
+                {{ notification.type_modification }}: {{ notification.details }} - {{ notification.user.username }}
+                <a href="{% url 'valider_demande' notification.id %}">Valider</a>
+            </li>
+        {% empty %}
+            <li>Aucune notification en attente.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

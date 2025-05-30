@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-1 mb-6 shadow">
+        <div class="col-lg-12 shadow p-4">
+            <h3>Liste des Remboursements</h3>
+            
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Montant du Remboursement</th>
+                        <th>Nom du Prêteur</th>
+                        <th>Nom de l'Avaliste</th>
+                        <th>Date du Remboursement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for remboursement in remboursements %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ remboursement.montant_rembourse }} 'FCFA'</td>
+                        <td>{{ remboursement.idMembre_preteur.nom }}</td>  <!-- Assurez-vous que 'preteur' est bien défini -->
+                        <td>{{ remboursement.idMembre_avaliste.nom }}</td>  <!-- Assurez-vous que 'avaliste' est bien défini -->
+                        <td>{{ remboursement.date_remboursement }}</td>
+                        <td>
+                            {% if  user.is_superuser %}
+                                <a href="{% url 'modifier_remboursement' remboursement.idRembo %}" class="btn btn-primary">Modififier un Remboursement</a>
+                                <a href="{% url 'supprimer_remboursement' remboursement.idRembo %}" class="btn btn-primary">Supprimer un Remboursement</a>
+                            {% endif  %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">Aucun remboursement trouvé.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

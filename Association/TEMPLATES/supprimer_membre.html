@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Suppression d’un membre{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-danger">Confirmer la désactivation du membre</h2>
+    <p>
+        Cette action va désactiver le membre dans la base de données (actif = 0),
+        <strong>et supprimer son compte utilisateur</strong> définitivement.
+    </p>
+
+    <div class="card p-3 my-4">
+        <p><strong>Nom :</strong> {{ membres.nom }}</p>
+        <p><strong>Prénom :</strong> {{ membres.prenom }}</p>
+        {% if membres.user %}
+            <p><strong>Identifiant (email) :</strong> {{ membres.user.email }}</p>
+        {% endif %}
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Oui, désactiver et supprimer</button>
+        <a href="{% url 'membres' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue - Tontine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .background {background: url('https://coulisses.orfeo.pro/wp-content/uploads/2020/04/mains-solidarite.jpg') no-repeat center center/cover;
+            height: 100%;
+            position: relative;
+            animation: zoomBackground 10s infinite alternate;
+        }
+
+        /* Animation pour zoomer l'image */
+        @keyframes zoomBackground {
+            0% {
+                background-size: 100%;
+            }
+            100% {
+                background-size: 110%;
+            }
+        }
+
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.4); /* Légère ombre pour contraster avec l'image */
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 34px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            max-width: 600px;}
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        ul li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .button {
+            margin-top: 30px;
+            background-color: #28a745;
+            padding: 15px 35px;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background">
+        <div class="overlay">
+            <h1>Notre association vous offre un cadre sécurisé pour gérer vos économies collectives, avec des bénéfices pour chaque membre</h1>
+
+            <h2>Pourquoi rejoindre notre tontine ?</h2>
+
+            <p>Une tontine est un système de gestion collective des économies qui permet à ses membres de participer à des prêts et de bénéficier de ressources communes. Ensemble, nous pouvons accomplir plus !</p>
+
+            <p>Avec notre association, vous avez la garantie de :</p>
+
+            <ul><li>✔ Solidarité et entraide</li>
+                <li>✔ Un système transparent et bien géré</li>
+                <li>✔ Des avantages pour chaque membre à chaque étape</li>
+            </ul>
+
+            <a href="{% url 'login' %}" class="button">Se connecter</a>
+        </div>
+    </div>
+
+</body>
+</html>

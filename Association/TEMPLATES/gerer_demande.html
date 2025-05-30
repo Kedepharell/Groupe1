@@ -1,0 +1,8 @@
+<h2>Demande de participation</h2>
+<p>Membre : {{ demande.membre }}</p>
+<p>Tontine : {{ demande.tontine }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="action" value="approuver">Approuver</button><button type="submit" name="action" value="refuser">Refuser</button>
+</form>

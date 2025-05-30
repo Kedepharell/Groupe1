@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix Paramètres Tontine</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Choisir les Paramètres de la Tontine</h1>
+    <h2>Membres de la Tontine</h2>
+    <ul>
+        {% for membre in membres %}
+            <li>{{ membre.username }}</li>
+        {% endfor %}
+    </ul>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="parametre">Sélectionnez un paramètre :</label>
+        <select name="parametre" id="parametre">
+            <option value="montant">Montant de la cotisation</option>
+            <option value="frequence">Fréquence des cotisations</option>
+            <!-- Ajoutez d'autres paramètres si nécessaire -->
+        </select>
+        <button type="submit">Valider</button>
+    </form>
+    <a href="{% url 'tableau_de_bord' %}">Retour au tableau de bord</a>
+</body>
+</html>

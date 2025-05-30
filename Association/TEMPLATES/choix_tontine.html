@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Choisir une Tontine</title>
+</head>
+<body>
+    <h1>Choisir votre Tontine</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Soumettre</button>  <!-- Texte simplifié -->
+    </form>
+    <a href="{% url 'tableau_de_bord' %}">Retour au tableau de bord</a>
+</body>
+</html>

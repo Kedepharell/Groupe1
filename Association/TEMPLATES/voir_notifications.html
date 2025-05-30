@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Voir les notifications</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        pre {
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Notifications reçues</h1>
+
+    {% if notifications %}
+    <table>
+        <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Type de modification</th>
+                <th>Détails</th>
+                <th>Statut</th>
+                <th>Date d'envoi</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notif in notifications %}
+            <tr>
+                <td>{{ notif.utilisateur.username }}</td>
+                <td>{{ notif.type_modification }}</td>
+                <td><pre>{{ notif.details }}</pre></td>
+                <td>{{ notif.get_statut_display }}</td>
+                <td>{{ notif.date_envoi|date:"d/m/Y H:i" }}</td>
+                <td>
+                    {% if notif.statut == 'en_attente' %}
+                        <form method="post" action="{% url 'valider_demande' notif.id %}">{% csrf_token %}
+                            <button type="submit">Valider</button>
+                        </form>
+                        <form method="post" action="{% url 'refuser_demande' notif.id %}">{% csrf_token %}
+                            <button type="submit">Refuser</button>
+                        </form>
+                    {% else %}
+                        <em>Déjà traité</em>
+                        <form method="post" action="{% url 'supprimer_notification' notif.id %}" style="margin-top: 5px;">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('Supprimer cette notification ?')">🗑 Supprimer</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucune notification à afficher.</p>
+    {% endif %}
+</body>
+</html>
